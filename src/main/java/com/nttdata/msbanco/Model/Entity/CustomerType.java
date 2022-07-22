@@ -10,8 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 public class CustomerType {
-    @Id
-    private ObjectId id;
-    private String customerTypeId;
-    private String customerTypeDescription;
+  @Id private ObjectId id;
+  private String customerTypeId;
+  private String customerTypeDescription;
 }

@@ -15,36 +15,40 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @AllArgsConstructor
 public class ProfileController {
-    private final ProfileService profileService;
+  private final ProfileService profileService;
 
-    @GetMapping(UIUtils.PROFILE_ALL)
-    public Flux<Profile> getAllProfile(){
-        log.info("Ingreso a getAllProfile");
-        return profileService.findAllProfile();
-    }
+  @GetMapping("/prueba")
+  public String getMessage() {
+    return "hola desde webflux";
+  }
 
-    @GetMapping(UIUtils.PROFILE_ID)
-    public Mono<Profile> getProfileById(@PathVariable(value = "idProfile") Integer idProfile) {
-        log.info("Ingreso a getProfileById");
-        return profileService.findProfileById(idProfile);
-    }
+  @GetMapping(UIUtils.PROFILE_ALL)
+  public Flux<Profile> getAllProfile() {
+    log.info("Ingreso a getAllProfile");
+    return profileService.findAllProfile();
+  }
 
-    @PostMapping(UIUtils.PROFILE_INS)
-    public Flux<Profile> saveProfile(@RequestBody Flux<Profile> Profile){
-        log.info("Ingreso a saveProfile");
-        return profileService.saveProfile(Profile);
-    }
+  @GetMapping(UIUtils.PROFILE_ID)
+  public Mono<Profile> getProfileById(@PathVariable(value = "idProfile") Integer idProfile) {
+    log.info("Ingreso a getProfileById");
+    return profileService.findProfileById(idProfile);
+  }
 
-    @PutMapping(UIUtils.PROFILE_UPD)
-    public Mono<Profile> updateProfile(@RequestBody Profile Profile){
-        log.info("Ingreso a updateProfile");
-        return profileService.updateProfile(Profile);
-    }
+  @PostMapping(UIUtils.PROFILE_INS)
+  public Flux<Profile> saveProfile(@RequestBody Flux<Profile> Profile) {
+    log.info("Ingreso a saveProfile");
+    return profileService.saveProfile(Profile);
+  }
 
-    @DeleteMapping(UIUtils.PROFILE_DEL)
-    public Mono<Void> deleteProfile(@PathVariable(value = "id") ObjectId idProfile){
-        log.info("Ingreso a deleteProfile");
-        return profileService.deleteProfile(idProfile);
-    }
-    
+  @PutMapping(UIUtils.PROFILE_UPD)
+  public Mono<Profile> updateProfile(@RequestBody Profile Profile) {
+    log.info("Ingreso a updateProfile");
+    return profileService.updateProfile(Profile);
+  }
+
+  @DeleteMapping(UIUtils.PROFILE_DEL)
+  public Mono<Void> deleteProfile(@PathVariable(value = "id") ObjectId idProfile) {
+    log.info("Ingreso a deleteProfile");
+    return profileService.deleteProfile(idProfile);
+  }
 }

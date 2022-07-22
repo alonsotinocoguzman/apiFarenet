@@ -14,8 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document(collection = "TransactionType")
 public class TransactionType {
-    @Id
-    private ObjectId id;
-    private String code;
-    private String description;
+  @Id private ObjectId id;
+  private String code;
+  private String description;
 }

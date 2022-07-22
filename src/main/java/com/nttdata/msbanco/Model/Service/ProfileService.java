@@ -6,13 +6,13 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface ProfileService {
-    Flux<Profile> findAllProfile();
+  Flux<Profile> findAllProfile();
 
-    Mono<Profile> findProfileById(Integer idProfile);
+  Mono<Profile> findProfileById(Integer idProfile);
 
-    Flux<Profile> saveProfile(Flux<Profile> accountType);
+  Flux<Profile> saveProfile(Flux<Profile> accountType);
 
-    Mono<Profile> updateProfile(Profile accountType);
+  Mono<Profile> updateProfile(Profile accountType);
 
-    Mono<Void> deleteProfile(ObjectId idProfile);
+  Mono<Void> deleteProfile(ObjectId idProfile);
 }

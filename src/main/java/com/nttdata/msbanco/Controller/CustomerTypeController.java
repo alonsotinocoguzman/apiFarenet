@@ -17,35 +17,37 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 public class CustomerTypeController {
-    private final CustomerTypeService customerTypeService;
+  private final CustomerTypeService customerTypeService;
 
-    @PostMapping(UIUtils.CUSTOMERTYPE_INS)
-    public Flux<CustomerType> saveCustomerTypes(@RequestBody List<CustomerType> customerTypes) {
-        log.info("Ingreso a saveCustomerTypes");
-        return customerTypeService.saveCustomerTypes(customerTypes);
-    }
+  @PostMapping(UIUtils.CUSTOMERTYPE_INS)
+  public Flux<CustomerType> saveCustomerTypes(@RequestBody List<CustomerType> customerTypes) {
+    log.info("Ingreso a saveCustomerTypes");
+    return customerTypeService.saveCustomerTypes(customerTypes);
+  }
 
-    @PutMapping(UIUtils.CUSTOMERTYPE_UPD)
-    public Mono<CustomerType> updateCustomerType(@RequestBody CustomerType customerType) {
-        log.info("Ingreso a updateCustomerType");
-        return customerTypeService.updateCustomerType(customerType);
-    }
+  @PutMapping(UIUtils.CUSTOMERTYPE_UPD)
+  public Mono<CustomerType> updateCustomerType(@RequestBody CustomerType customerType) {
+    log.info("Ingreso a updateCustomerType");
+    return customerTypeService.updateCustomerType(customerType);
+  }
 
-    @DeleteMapping(UIUtils.CUSTOMERTYPE_DEL)
-    public Mono<Void> deleteCustomerType(@PathVariable(value = "customerTypeId") ObjectId customerTypeId) {
-        log.info("Ingreso a deleteCustomerType");
-        return customerTypeService.deleteCustomerType(customerTypeId);
-    }
+  @DeleteMapping(UIUtils.CUSTOMERTYPE_DEL)
+  public Mono<Void> deleteCustomerType(
+      @PathVariable(value = "customerTypeId") ObjectId customerTypeId) {
+    log.info("Ingreso a deleteCustomerType");
+    return customerTypeService.deleteCustomerType(customerTypeId);
+  }
 
-    @GetMapping(UIUtils.CUSTOMERTYPE_ALL)
-    public Flux<CustomerType> getAllCustomerTypes() {
-        log.info("Ingreso a getAllCustomerTypes");
-        return customerTypeService.getAllCustomerTypes();
-    }
+  @GetMapping(UIUtils.CUSTOMERTYPE_ALL)
+  public Flux<CustomerType> getAllCustomerTypes() {
+    log.info("Ingreso a getAllCustomerTypes");
+    return customerTypeService.getAllCustomerTypes();
+  }
 
-    @GetMapping(UIUtils.CUSTOMERTYPE_ID)
-    public Mono<CustomerType> getCustomerType(@PathVariable(value = "customerTypeId") ObjectId customerTypeId) {
-        log.info("Ingreso a getCustomerType");
-        return customerTypeService.getCustomerTypeById(customerTypeId);
-    }
+  @GetMapping(UIUtils.CUSTOMERTYPE_ID)
+  public Mono<CustomerType> getCustomerType(
+      @PathVariable(value = "customerTypeId") ObjectId customerTypeId) {
+    log.info("Ingreso a getCustomerType");
+    return customerTypeService.getCustomerTypeById(customerTypeId);
+  }
 }

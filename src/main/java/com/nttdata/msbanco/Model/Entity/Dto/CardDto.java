@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CardDto {
-    private Double availableBalance;
+  private Double availableBalance;
 }

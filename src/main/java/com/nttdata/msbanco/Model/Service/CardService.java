@@ -13,5 +13,6 @@ public interface CardService {
   Mono<Card> payBalance(Double payBalance, String id);
 
   Mono<CardDto> getBalance(String id);
+
   Flux<CardDto> getBalanceByCustomerId(String id);
 }

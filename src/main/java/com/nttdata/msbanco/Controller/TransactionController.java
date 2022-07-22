@@ -41,8 +41,9 @@ public class TransactionController {
   public Mono<Transaction> getTransactionById(@PathVariable(value = "id") ObjectId id) {
     return transactionService.getTransationById(id);
   }
+
   @GetMapping(UIUtils.TRANSACTION_BALANCE)
-  public Mono<Double>getTransactionBalance(@PathVariable(value = "id") ObjectId id){
+  public Mono<Double> getTransactionBalance(@PathVariable(value = "id") ObjectId id) {
     return transactionService.getTransactionBalance(id);
   }
 }

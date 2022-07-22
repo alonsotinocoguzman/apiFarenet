@@ -8,9 +8,13 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 public interface CustomerTypeService {
-    Flux<CustomerType> saveCustomerTypes(List<CustomerType> customerTypes);
-    Mono<CustomerType> updateCustomerType(CustomerType customerType);
-    Mono<Void> deleteCustomerType(ObjectId customerTypeId);
-    Flux<CustomerType> getAllCustomerTypes();
-    Mono<CustomerType> getCustomerTypeById(ObjectId customerTypeId);
+  Flux<CustomerType> saveCustomerTypes(List<CustomerType> customerTypes);
+
+  Mono<CustomerType> updateCustomerType(CustomerType customerType);
+
+  Mono<Void> deleteCustomerType(ObjectId customerTypeId);
+
+  Flux<CustomerType> getAllCustomerTypes();
+
+  Mono<CustomerType> getCustomerTypeById(ObjectId customerTypeId);
 }

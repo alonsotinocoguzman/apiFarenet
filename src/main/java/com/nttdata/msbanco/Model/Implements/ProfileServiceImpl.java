@@ -14,32 +14,30 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 @Slf4j
 public class ProfileServiceImpl implements ProfileService {
-    private final ProfileRepository profileRepository;
-    @Override
-    public Flux<Profile> findAllProfile() {
-        return profileRepository.findAll();
-    }
+  private final ProfileRepository profileRepository;
 
-    @Override
-    public Mono<Profile> findProfileById(Integer idProfile) {
-        return profileRepository
-                .findAll()
-                .filter(x -> x.getProfileId().equals(idProfile))
-                .elementAt(0);
-    }
+  @Override
+  public Flux<Profile> findAllProfile() {
+    return profileRepository.findAll();
+  }
 
-    @Override
-    public Flux<Profile> saveProfile(Flux<Profile> profile) {
-        return profileRepository.saveAll(profile);
-    }
+  @Override
+  public Mono<Profile> findProfileById(Integer idProfile) {
+    return profileRepository.findAll().filter(x -> x.getProfileId().equals(idProfile)).elementAt(0);
+  }
 
-    @Override
-    public Mono<Profile> updateProfile(Profile profile) {
-        return profileRepository.save(profile);
-    }
+  @Override
+  public Flux<Profile> saveProfile(Flux<Profile> profile) {
+    return profileRepository.saveAll(profile);
+  }
 
-    @Override
-    public Mono<Void> deleteProfile(ObjectId idProfile) {
-        return profileRepository.deleteById(idProfile);
-    }
+  @Override
+  public Mono<Profile> updateProfile(Profile profile) {
+    return profileRepository.save(profile);
+  }
+
+  @Override
+  public Mono<Void> deleteProfile(ObjectId idProfile) {
+    return profileRepository.deleteById(idProfile);
+  }
 }
