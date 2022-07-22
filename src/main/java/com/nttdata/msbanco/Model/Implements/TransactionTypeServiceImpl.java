@@ -14,34 +14,33 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 @Service
 public class TransactionTypeServiceImpl implements TransactionTypeService {
-    private TransactionTypeRepository transactionTypeRepository;
+  private TransactionTypeRepository transactionTypeRepository;
 
+  @Override
+  public Mono<TransactionType> saveTransactionType(TransactionType transactionType) {
+    return transactionTypeRepository.save(transactionType);
+  }
 
-    @Override
-    public Mono<TransactionType> saveTransactionType(TransactionType transactionType) {
-        return transactionTypeRepository.save(transactionType);
-    }
+  @Override
+  public Mono<TransactionType> updateTransactionType(TransactionType transactionType) {
+    return transactionTypeRepository.save(transactionType);
+  }
 
-    @Override
-    public Mono<TransactionType> updateTransactionType(TransactionType transactionType) {
-        return transactionTypeRepository.save(transactionType);
-    }
+  @Override
+  public Mono<Void> deleteTransactionType(ObjectId id) {
+    return transactionTypeRepository.deleteById(id);
+  }
 
-    @Override
-    public Mono<Void> deleteTransactionType(ObjectId id) {
-        return transactionTypeRepository.deleteById(id);
-    }
+  @Override
+  public Flux<TransactionType> getTransactionTypeList() {
+    return transactionTypeRepository.findAll();
+  }
 
-    @Override
-    public Flux<TransactionType> getTransactionTypeList() {
-        return transactionTypeRepository.findAll();
-    }
-
-    @Override
-    public Mono<TransactionType> getTransactionType(String code) {
-        return transactionTypeRepository
-                .findAll()
-                .filter(transactionType -> transactionType.getCode().equals(code))
-                .elementAt(0);
-    }
+  @Override
+  public Mono<TransactionType> getTransactionType(String code) {
+    return transactionTypeRepository
+        .findAll()
+        .filter(transactionType -> transactionType.getCode().equals(code))
+        .elementAt(0);
+  }
 }

@@ -1,7 +1,6 @@
 package com.nttdata.msbanco.Controller;
 
 import com.nttdata.msbanco.Model.Entity.BankAccount;
-import com.nttdata.msbanco.Model.Entity.Customer;
 import com.nttdata.msbanco.Model.Service.BankAccountService;
 import com.nttdata.msbanco.Model.Service.CustomerService;
 import com.nttdata.msbanco.Utils.UIUtils;
@@ -12,54 +11,55 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.io.IOException;
-
 @Slf4j
 @AllArgsConstructor
 @RestController
 @RequestMapping(UIUtils.BANKACCOUNT_BASEURL)
 public class BankAccountController {
-    private final BankAccountService bankAccountService;
-    private final CustomerService customerService;
+  private final BankAccountService bankAccountService;
+  private final CustomerService customerService;
 
-    @PostMapping(UIUtils.BANKACCOUNT_INS)
-    public Mono<BankAccount> saveBankAccount(@RequestBody BankAccount bankAccount)throws Exception {
-        log.info("INICIO saveBankAccount");
-        Mono<BankAccount> bankAccountMono = bankAccountService.saveBankAccount(bankAccount);
-        /*bankAccountMono.subscribe(ba -> {
-            log.info("FIN saveBankAccount");
-            log.info("Cuenta Bancaria Registrada:");
-            log.info(ba.getDocumentNumber());
-            log.info(ba.getNumberAccount());
-            log.info(ba.getAccountBalance().toString());
-        });*/
-        /*BankAccount ba = bankAccountMono.block();
+  @PostMapping(UIUtils.BANKACCOUNT_INS)
+  public Mono<BankAccount> saveBankAccount(@RequestBody BankAccount bankAccount) throws Exception {
+    log.info("INICIO saveBankAccount");
+    Mono<BankAccount> bankAccountMono = bankAccountService.saveBankAccount(bankAccount);
+    /*bankAccountMono.subscribe(ba -> {
         log.info("FIN saveBankAccount");
         log.info("Cuenta Bancaria Registrada:");
         log.info(ba.getDocumentNumber());
         log.info(ba.getNumberAccount());
-        log.info(ba.getAccountBalance().toString());*/
+        log.info(ba.getAccountBalance().toString());
+    });*/
+    /*BankAccount ba = bankAccountMono.block();
+    log.info("FIN saveBankAccount");
+    log.info("Cuenta Bancaria Registrada:");
+    log.info(ba.getDocumentNumber());
+    log.info(ba.getNumberAccount());
+    log.info(ba.getAccountBalance().toString());*/
 
-        return bankAccountMono;
-    }
+    return bankAccountMono;
+  }
 
-    @PutMapping(UIUtils.BANKACCOUNT_UPD)
-    public Mono<BankAccount> updateBankAccount(@RequestBody BankAccount bankAccount) {
-        return bankAccountService.updateBankAccount(bankAccount);
-    }
+  @PutMapping(UIUtils.BANKACCOUNT_UPD)
+  public Mono<BankAccount> updateBankAccount(@RequestBody BankAccount bankAccount) {
+    return bankAccountService.updateBankAccount(bankAccount);
+  }
 
-    @DeleteMapping(UIUtils.BANKACCOUNT_DEL)
-    public Mono<Void> deleteBankAccount(@PathVariable(value = "bankAccountId") ObjectId bankAccountId) {
-        return bankAccountService.deleteBankAccount(bankAccountId);
-    }
+  @DeleteMapping(UIUtils.BANKACCOUNT_DEL)
+  public Mono<Void> deleteBankAccount(
+      @PathVariable(value = "bankAccountId") ObjectId bankAccountId) {
+    return bankAccountService.deleteBankAccount(bankAccountId);
+  }
 
-    @GetMapping(UIUtils.BANKACCOUNT_ALL_BY_CUSTOMER)
-    public Flux<BankAccount> getAllBankAccountsByCustomer(@PathVariable(value = "documentNumber") String documentNumber) {
-        return bankAccountService.getAllBankAccountsByCustomer(documentNumber);
-    }
+  @GetMapping(UIUtils.BANKACCOUNT_ALL_BY_CUSTOMER)
+  public Flux<BankAccount> getAllBankAccountsByCustomer(
+      @PathVariable(value = "documentNumber") String documentNumber) {
+    return bankAccountService.getAllBankAccountsByCustomer(documentNumber);
+  }
 
-    @GetMapping(UIUtils.BANKACCOUNT_ID)
-    public Mono<BankAccount> getBankAccount(@PathVariable(value = "bankAccountId") ObjectId bankAccountId) {
-        return bankAccountService.getBankAccount(bankAccountId);
-    }
+  @GetMapping(UIUtils.BANKACCOUNT_ID)
+  public Mono<BankAccount> getBankAccount(
+      @PathVariable(value = "bankAccountId") ObjectId bankAccountId) {
+    return bankAccountService.getBankAccount(bankAccountId);
+  }
 }

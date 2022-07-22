@@ -24,30 +24,33 @@ public class CustomerController {
   }
 
   @GetMapping(UIUtils.CUSTOMER_ID)
-  public Mono<Customer> getCustomerByDocumentNumber(@PathVariable(value = "documentNumber") String documentNumber) {
+  public Mono<Customer> getCustomerByDocumentNumber(
+      @PathVariable(value = "documentNumber") String documentNumber) {
     log.info("Ingreso a getCustomerByDocumentNumber");
     return customerService.findByDocumentNumber(documentNumber);
   }
 
   @PostMapping(UIUtils.CUSTOMER_INS)
-  public Mono<Customer> saveCustomer(@RequestBody Customer customer){
+  public Mono<Customer> saveCustomer(@RequestBody Customer customer) {
     log.info("Ingreso a saveCustomer");
     return customerService.saveCustomer(customer);
   }
 
   @PutMapping(UIUtils.CUSTOMER_UPD)
-  public Mono<Customer> updateCustomer(@RequestBody Customer customer){
+  public Mono<Customer> updateCustomer(@RequestBody Customer customer) {
     log.info("Ingreso a updateCustomer");
     return customerService.updateCustomer(customer);
   }
 
   @DeleteMapping(UIUtils.CUSTOMER_DEL)
-  public Mono<Void> deleteCustomer(@PathVariable(value = "customerId") ObjectId customerId){
+  public Mono<Void> deleteCustomer(@PathVariable(value = "customerId") ObjectId customerId) {
     log.info("Ingreso a deleteCustomer");
     return customerService.deleteCustomer(customerId);
   }
+
   @GetMapping(UIUtils.CUSTOMER_ALL_PRODUCTS)
-  public Flux<Object> getCustomerAllProucts(@RequestParam(value = "nroDocumento") String nroDocumento){
+  public Flux<Object> getCustomerAllProucts(
+      @RequestParam(value = "nroDocumento") String nroDocumento) {
     return customerService.getCustomerAllProucts(nroDocumento);
   }
 }

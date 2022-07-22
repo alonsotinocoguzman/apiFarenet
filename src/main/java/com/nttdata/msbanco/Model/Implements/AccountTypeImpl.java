@@ -1,9 +1,9 @@
 package com.nttdata.msbanco.Model.Implements;
 
 import com.nttdata.msbanco.Model.Entity.AccountType;
-import com.nttdata.msbanco.Repository.AccountTypeRepository;
 import com.nttdata.msbanco.Model.Service.AccountTypeService;
 import com.nttdata.msbanco.Model.Service.ProductBankService;
+import com.nttdata.msbanco.Repository.AccountTypeRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;

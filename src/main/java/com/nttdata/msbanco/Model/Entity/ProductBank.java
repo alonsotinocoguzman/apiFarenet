@@ -10,7 +10,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 public class ProductBank {
-    @Id
-    private ObjectId idProductBank;
-    private String typeBankProduct;
+  @Id private ObjectId idProductBank;
+  private String typeBankProduct;
 }

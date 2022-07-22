@@ -18,5 +18,4 @@ public class AccountType implements Serializable {
   private Integer idAccountType;
   private String description;
   private List<String> productBankList;
-
 }

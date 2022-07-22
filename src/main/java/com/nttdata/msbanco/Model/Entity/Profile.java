@@ -14,8 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document(collection = "profile")
 public class Profile {
-    @Id
-    private ObjectId id;
-    private String profileId;
-    private String profile;
+  @Id private ObjectId id;
+  private String profileId;
+  private String profile;
 }

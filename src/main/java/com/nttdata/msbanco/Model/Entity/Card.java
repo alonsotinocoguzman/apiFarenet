@@ -21,9 +21,8 @@ public class Card {
   private String customerId;
   private String numberDocument;
   private String numberAccountToOther;
-  private boolean overdueDebt=false;
+  private boolean overdueDebt = false;
   private Error error;
 
-  public Card(Card q) {
-  }
+  public Card(Card q) {}
 }

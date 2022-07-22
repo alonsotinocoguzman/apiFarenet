@@ -6,13 +6,13 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface TransactionTypeService {
-    Mono<TransactionType> saveTransactionType(TransactionType transactionType);
+  Mono<TransactionType> saveTransactionType(TransactionType transactionType);
 
-    Mono<TransactionType> updateTransactionType(TransactionType transactionType);
+  Mono<TransactionType> updateTransactionType(TransactionType transactionType);
 
-    Mono<Void> deleteTransactionType(ObjectId id);
+  Mono<Void> deleteTransactionType(ObjectId id);
 
-    Flux<TransactionType> getTransactionTypeList();
+  Flux<TransactionType> getTransactionTypeList();
 
-    Mono<TransactionType> getTransactionType(String code);
+  Mono<TransactionType> getTransactionType(String code);
 }
