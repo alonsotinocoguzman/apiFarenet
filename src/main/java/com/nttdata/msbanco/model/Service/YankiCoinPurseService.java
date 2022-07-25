@@ -11,4 +11,5 @@ public interface YankiCoinPurseService {
     Mono<Void> deleteYankiCoinPurse(ObjectId id);
     Flux<YankiCoinPurse> getAllYankiCoinPurses();
     Mono<YankiCoinPurse> getYankiCoinPurse(String documentNumber);
+    Mono<YankiCoinPurse> sendAndReceiveYankiCoinPurse(YankiCoinPurse yankiCoinPurse);
 }

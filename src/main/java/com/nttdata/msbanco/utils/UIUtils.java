@@ -58,6 +58,7 @@ public class UIUtils {
     public static final String TRANSACTION_TYPE_ID = "find-id/{transactionTypeCode}";
     public static final String YANKI_COIN_PURSE_BASEURL = "coin-purse";
     public static final String YANKI_COIN_PURSE_INS = "save";
+    public static final String YANKI_COIN_PURSE_SEND_RECEIVE_INS = "send-receive";
     public static final String YANKI_COIN_PURSE_UPD = "update";
     public static final String YANKI_COIN_PURSE_DEL = "delete/{coinPurseId}";
     public static final String YANKI_COIN_PURSE_ALL = "find-all";

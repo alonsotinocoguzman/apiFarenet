@@ -41,4 +41,9 @@ public class YankiCoinPurseController {
     public Mono<YankiCoinPurse> getYankiCoinPurse(@PathVariable(value = "coinPurseDocumentNumber") String documentNumber) {
         return yankiCoinPurseService.getYankiCoinPurse(documentNumber);
     }
+
+    @PostMapping(UIUtils.YANKI_COIN_PURSE_SEND_RECEIVE_INS)
+    public Mono<YankiCoinPurse> sendAndReceiveYankiCoinPurse(@RequestBody YankiCoinPurse yankiCoinPurse) {
+        return yankiCoinPurseService.sendAndReceiveYankiCoinPurse(yankiCoinPurse);
+    }
 }
