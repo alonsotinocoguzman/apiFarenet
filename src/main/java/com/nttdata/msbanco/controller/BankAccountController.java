@@ -1,5 +1,6 @@
 package com.nttdata.msbanco.controller;
 
+import com.nttdata.msbanco.kafka.producer.KafkaStringProducer;
 import com.nttdata.msbanco.model.Entity.BankAccount;
 import com.nttdata.msbanco.model.Service.BankAccountService;
 import com.nttdata.msbanco.model.Service.CustomerService;
@@ -18,10 +19,12 @@ import reactor.core.publisher.Mono;
 public class BankAccountController {
   private final BankAccountService bankAccountService;
   private final CustomerService customerService;
+  private final KafkaStringProducer kafkaStringProducer;
 
   @PostMapping(UIUtils.BANKACCOUNT_INS)
   public Mono<BankAccount> saveBankAccount(@RequestBody BankAccount bankAccount) throws Exception {
     log.info("INICIO saveBankAccount");
+    kafkaStringProducer.sendMessage("INICIO saveBankAccount: " + bankAccount.toString());
     Mono<BankAccount> bankAccountMono = bankAccountService.saveBankAccount(bankAccount);
     /*bankAccountMono.subscribe(ba -> {
         log.info("FIN saveBankAccount");
@@ -42,24 +45,28 @@ public class BankAccountController {
 
   @PutMapping(UIUtils.BANKACCOUNT_UPD)
   public Mono<BankAccount> updateBankAccount(@RequestBody BankAccount bankAccount) {
+    kafkaStringProducer.sendMessage("INICIO updateBankAccount: " + bankAccount.toString());
     return bankAccountService.updateBankAccount(bankAccount);
   }
 
   @DeleteMapping(UIUtils.BANKACCOUNT_DEL)
   public Mono<Void> deleteBankAccount(
       @PathVariable(value = "bankAccountId") ObjectId bankAccountId) {
+    kafkaStringProducer.sendMessage("INICIO deleteBankAccount: " + bankAccountId);
     return bankAccountService.deleteBankAccount(bankAccountId);
   }
 
   @GetMapping(UIUtils.BANKACCOUNT_ALL_BY_CUSTOMER)
   public Flux<BankAccount> getAllBankAccountsByCustomer(
       @PathVariable(value = "documentNumber") String documentNumber) {
+    kafkaStringProducer.sendMessage("INICIO getAllBankAccountsByCustomer: " + documentNumber);
     return bankAccountService.getAllBankAccountsByCustomer(documentNumber);
   }
 
   @GetMapping(UIUtils.BANKACCOUNT_ID)
   public Mono<BankAccount> getBankAccount(
       @PathVariable(value = "bankAccountId") ObjectId bankAccountId) {
+    kafkaStringProducer.sendMessage("INICIO getBankAccount: " + bankAccountId);
     return bankAccountService.getBankAccount(bankAccountId);
   }
 }
