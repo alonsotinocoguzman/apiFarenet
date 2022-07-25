@@ -20,7 +20,7 @@ public class BankAccount {
   @Id private ObjectId bankAccountId;
   private String documentNumber;
   private String numberAccount;
-  private Float accountBalance;
+  private Double accountBalance;
   private Integer accountTypeId;
   private Double startingBalance = 0.0;
   private Integer maxDepositTransaction = 15;

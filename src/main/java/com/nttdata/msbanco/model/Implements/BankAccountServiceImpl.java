@@ -1,6 +1,5 @@
 package com.nttdata.msbanco.model.Implements;
 
-import com.nttdata.msbanco.Enum.Profile;
 import com.nttdata.msbanco.model.Entity.BankAccount;
 import com.nttdata.msbanco.model.Entity.Customer;
 import com.nttdata.msbanco.model.Service.BankAccountService;
@@ -126,37 +125,50 @@ public class BankAccountServiceImpl implements BankAccountService {
   }
 
   private Mono<BankAccount> save(BankAccount bankAccount) throws Exception {
-    if (bankAccount.getProfile().equals(Profile.VIP.toString())
-        && bankAccount.getStartingBalance() == 0.0) {
-      cardRepository
-          .findAll()
-          .filter(
-              customerId -> customerId.getNumberDocument().equals(bankAccount.getDocumentNumber()))
-          .switchIfEmpty(Mono.error(new IOException("no existe customerId")))
-          .filter(
-              numberAccountToOther ->
-                  numberAccountToOther
-                      .getNumberAccountToOther()
-                      .equals(bankAccount.getNumberAccountToOther()))
-          .switchIfEmpty(Mono.error(new IOException("no existe cuenta")))
-          .map(
-              saveData -> {
-                bankAccount.setCommission(0.0);
-                return bankAccountRepository.save(bankAccount);
-              });
-    } else if (bankAccount.getProfile().equals(Profile.PYME.toString())) {
-      cardRepository
-          .findAll()
-          .filter(
-              customerId -> customerId.getNumberDocument().equals(bankAccount.getDocumentNumber()))
-          .map(
-              saveData -> {
-                bankAccount.setCommission(0.0);
-                return bankAccountRepository.save(bankAccount);
-              });
-      bankAccount.setCommission(0.0);
+    switch (bankAccount.getProfile()) {
+      case "VIP":
+        cardRepository
+            .findAll()
+            .filter(
+                customerId ->
+                    customerId.getNumberDocument().equals(bankAccount.getDocumentNumber()))
+            .switchIfEmpty(Mono.error(new IOException("no existe customerId")))
+            .filter(
+                numberAccountToOther ->
+                    numberAccountToOther
+                        .getNumberAccountToOther()
+                        .equals(bankAccount.getNumberAccountToOther()))
+            .switchIfEmpty(Mono.error(new IOException("no existe cuenta")))
+            .map(
+                saveData -> {
+                  if (saveData.getMaxDepositTransaction() > 15) {
+                    bankAccount.setAccountBalance(
+                        bankAccount.getAccountBalance()
+                            - (bankAccount.getAccountBalance() * bankAccount.getCommission()));
+                  }
+                  bankAccount.setCommission(0.0);
+                  return bankAccountRepository.save(bankAccount);
+                });
+        break;
+      case "PYME":
+        cardRepository
+            .findAll()
+            .filter(
+                customerId ->
+                    customerId.getNumberDocument().equals(bankAccount.getDocumentNumber()))
+            .map(
+                saveData -> {
+                  if (saveData.getMaxDepositTransaction() > 15) {
+                    bankAccount.setAccountBalance(
+                        bankAccount.getAccountBalance()
+                            - (bankAccount.getAccountBalance() * bankAccount.getCommission()));
+                  }
+                  bankAccount.setCommission(0.0);
+                  return bankAccountRepository.save(bankAccount);
+                });
+        break;
     }
-    return bankAccountRepository.save(bankAccount);
+    return Mono.empty();
   }
 
   @Override
