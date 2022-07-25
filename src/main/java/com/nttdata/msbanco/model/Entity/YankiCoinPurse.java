@@ -21,6 +21,9 @@ public class YankiCoinPurse {
     private String cellphoneNumber;
     private String cellphoneImei;
     private String email;
-    private String availableBalance;
+    private Double availableBalance;
     private String debitCardNumber;
+    private Double amountSent;
+    private Double amountReceive;
+    private String operationType;
 }
