@@ -15,31 +15,31 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping(UIUtils.TRANSACTION_TYPE_BASEURL)
 public class TransactionTypeController {
-  private TransactionTypeService transactionTypeService;
+    private TransactionTypeService transactionTypeService;
 
-  @PostMapping(UIUtils.TRANSACTION_TYPE_INS)
-  public Mono<TransactionType> saveTransactionType(@RequestBody TransactionType transactionType) {
-    return transactionTypeService.saveTransactionType(transactionType);
-  }
+    @PostMapping(UIUtils.TRANSACTION_TYPE_INS)
+    public Mono<TransactionType> saveTransactionType(@RequestBody TransactionType transactionType) {
+        return transactionTypeService.saveTransactionType(transactionType);
+    }
 
-  @PutMapping(UIUtils.TRANSACTION_TYPE_UPD)
-  public Mono<TransactionType> updateTransaction(@RequestBody TransactionType transactionType) {
-    return transactionTypeService.updateTransactionType(transactionType);
-  }
+    @PutMapping(UIUtils.TRANSACTION_TYPE_UPD)
+    public Mono<TransactionType> updateTransaction(@RequestBody TransactionType transactionType) {
+        return transactionTypeService.updateTransactionType(transactionType);
+    }
 
-  @DeleteMapping(UIUtils.TRANSACTION_TYPE_DEL)
-  public Mono<Void> deleteTransactionType(@PathVariable(value = "transactionTypeId") ObjectId id) {
-    return transactionTypeService.deleteTransactionType(id);
-  }
+    @DeleteMapping(UIUtils.TRANSACTION_TYPE_DEL)
+    public Mono<Void> deleteTransactionType(@PathVariable(value = "transactionTypeId") ObjectId id) {
+        return transactionTypeService.deleteTransactionType(id);
+    }
 
-  @GetMapping(UIUtils.TRANSACTION_TYPE_ALL)
-  public Flux<TransactionType> getTransactionTypeList() {
-    return transactionTypeService.getTransactionTypeList();
-  }
+    @GetMapping(UIUtils.TRANSACTION_TYPE_ALL)
+    public Flux<TransactionType> getTransactionTypeList() {
+        return transactionTypeService.getTransactionTypeList();
+    }
 
-  @GetMapping(UIUtils.TRANSACTION_TYPE_ID)
-  public Mono<TransactionType> getTransactionType(
-      @PathVariable(value = "transactionTypeCode") String code) {
-    return transactionTypeService.getTransactionType(code);
-  }
+    @GetMapping(UIUtils.TRANSACTION_TYPE_ID)
+    public Mono<TransactionType> getTransactionType(
+            @PathVariable(value = "transactionTypeCode") String code) {
+        return transactionTypeService.getTransactionType(code);
+    }
 }

@@ -9,7 +9,7 @@ spring:
   data:
     mongodb:
       database: bank
-      uri: mongodb+srv://admin:5fwHFdTkR3WIVKW9@clustermongo.hdca3.mongodb.net/?retryWrites=true&w=majority
+      #uri: mongodb+srv://admin:5fwHFdTkR3WIVKW9@clustermongo.hdca3.mongodb.net/?retryWrites=true&w=majority
       port: 27017
 server:
   port: 8090
