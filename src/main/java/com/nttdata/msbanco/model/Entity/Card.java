@@ -22,6 +22,7 @@ public class Card {
   private String numberDocument;
   private String numberAccountToOther;
   private boolean overdueDebt = false;
+  private Integer maxDepositTransaction=15;
   private Error error;
 
   public Card(Card q) {}
