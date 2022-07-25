@@ -1,5 +1,6 @@
 package com.nttdata.msbanco.controller;
 
+import com.nttdata.msbanco.kafka.producer.KafkaStringProducer;
 import com.nttdata.msbanco.model.Entity.ProductBank;
 import com.nttdata.msbanco.model.Service.ProductBankService;
 import com.nttdata.msbanco.utils.UIUtils;
@@ -18,16 +19,19 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductBankController {
   private final ProductBankService bankProductService;
+  private final KafkaStringProducer kafkaStringProducer;
 
   @PostMapping(UIUtils.BANKPRODUCT_INS)
   public Flux<ProductBank> saveBankProducts(@RequestBody List<ProductBank> bankProducts) {
     log.info("Ingreso a saveBankProducts");
+    kafkaStringProducer.sendMessage("Ingreso a saveBankProducts");
     return bankProductService.saveBankProducts(bankProducts);
   }
 
   @PutMapping(UIUtils.BANKPRODUCT_UPD)
   public Mono<ProductBank> updateBankProduct(@RequestBody ProductBank productBank) {
     log.info("Ingreso a updateBankProduct");
+    kafkaStringProducer.sendMessage("Ingreso a updateBankProduct" + productBank.toString());
     return bankProductService.updateBankProduct(productBank);
   }
 
@@ -35,12 +39,14 @@ public class ProductBankController {
   public Mono<Void> deleteBankProduct(
       @PathVariable(value = "bankProductId") ObjectId bankProductId) {
     log.info("Ingreso a deleteBankProduct");
+    kafkaStringProducer.sendMessage("Ingreso a deleteBankProduct" + bankProductId);
     return bankProductService.deleteBankProduct(bankProductId);
   }
 
   @GetMapping(UIUtils.BANKPRODUCT_ALL)
   public Flux<ProductBank> getAllBankProducts() {
     log.info("Ingreso a getAllBankProducts");
+    kafkaStringProducer.sendMessage("Ingreso a getAllBankProducts");
     return bankProductService.getAllBankProducts();
   }
 
@@ -48,6 +54,7 @@ public class ProductBankController {
   public Mono<ProductBank> getBankProductById(
       @PathVariable(value = "bankProductId") ObjectId bankProductId) {
     log.info("Ingreso a getBankProductById");
+    kafkaStringProducer.sendMessage("Ingreso a getBankProductById: " + bankProductId);
     return bankProductService.getBankProductById(bankProductId);
   }
 }
