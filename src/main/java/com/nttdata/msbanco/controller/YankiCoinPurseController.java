@@ -38,8 +38,8 @@ public class YankiCoinPurseController {
     }
 
     @GetMapping(UIUtils.YANKI_COIN_PURSE_ID)
-    public Mono<YankiCoinPurse> getYankiCoinPurse(@PathVariable(value = "coinPurseDocumentNumber") String documentNumber) {
-        return yankiCoinPurseService.getYankiCoinPurse(documentNumber);
+    public Mono<YankiCoinPurse> getYankiCoinPurse(@PathVariable(value = "coinPurseDocumentNumber") String documentNumber_cellphoneNumber) {
+        return yankiCoinPurseService.getYankiCoinPurse(documentNumber_cellphoneNumber);
     }
 
     @PostMapping(UIUtils.YANKI_COIN_PURSE_SEND_RECEIVE_INS)

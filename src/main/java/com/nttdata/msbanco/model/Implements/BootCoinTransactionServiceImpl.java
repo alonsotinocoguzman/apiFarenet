@@ -2,8 +2,10 @@ package com.nttdata.msbanco.model.Implements;
 
 import com.nttdata.msbanco.model.Entity.BootCoinPurse;
 import com.nttdata.msbanco.model.Entity.BootCoinTransaction;
+import com.nttdata.msbanco.model.Entity.YankiCoinPurse;
 import com.nttdata.msbanco.model.Service.BootCoinPurseService;
 import com.nttdata.msbanco.model.Service.BootCoinTransactionService;
+import com.nttdata.msbanco.model.Service.YankiCoinPurseService;
 import com.nttdata.msbanco.repository.BootCoinTransactionRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,7 @@ public class BootCoinTransactionServiceImpl implements BootCoinTransactionServic
 
     BootCoinTransactionRepository bootCoinTransactionRepository;
     BootCoinPurseService bootCoinPurseService;
+    YankiCoinPurseService yankiCoinPurseService;
 
 
     @Override
@@ -31,13 +34,24 @@ public class BootCoinTransactionServiceImpl implements BootCoinTransactionServic
 
         transaction.setTransactionNumber(randomNumber);
 
-        Mono<BootCoinPurse> coinPurse = bootCoinPurseService.getCoinPurse(transaction.getCellphoneNumber());
-        coinPurse.subscribe(cp -> {
+        Mono<BootCoinPurse> bootCoinPurse = bootCoinPurseService.getCoinPurse(transaction.getCellphoneNumber());
+        bootCoinPurse.subscribe(cp -> {
             Double availableBalance = cp.getAvailableBalance();
             availableBalance = availableBalance + (transaction.getAmount() / 2);
-            log.info("availableBalance: " + availableBalance);
+            log.info("BootCoin availableBalance: " + availableBalance);
             cp.setAvailableBalance(availableBalance);
+
             bootCoinPurseService.updateCoinPurse(cp).subscribe();
+        });
+
+        Mono<YankiCoinPurse> yankiCoinPurse = yankiCoinPurseService.getYankiCoinPurse(transaction.getCellphoneNumber());
+        yankiCoinPurse.subscribe(ycp->{
+            Double balance = ycp.getAvailableBalance();
+            balance = balance - transaction.getAmount();
+            log.info("Yanki availableBalance: " + balance);
+
+            ycp.setAvailableBalance(balance);
+            yankiCoinPurseService.updateYankiCoinPurse(ycp).subscribe();
         });
 
         return bootCoinTransactionRepository.save(transaction);
