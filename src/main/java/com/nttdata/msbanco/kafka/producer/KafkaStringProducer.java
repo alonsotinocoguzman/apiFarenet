@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 public class KafkaStringProducer {
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaStringProducer.class);
 
-    /*private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     public KafkaStringProducer(@Qualifier("kafkaStringTemplate") KafkaTemplate<String, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
-    }*/
+    }
 
     public void sendMessage(String message) {
         LOGGER.info("Producing message {}", message);

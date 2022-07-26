@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class KafkaStringConsumer {
-    /*Logger logger = LoggerFactory.getLogger(KafkaStringConsumer.class);
+    Logger logger = LoggerFactory.getLogger(KafkaStringConsumer.class);
 
     @KafkaListener(topics = "TOPIC-DEMO", groupId = "group_id")
     public void getMessage(String message) {
         logger.info("Consuming Message {}", message);
-    }*/
+    }
 }
