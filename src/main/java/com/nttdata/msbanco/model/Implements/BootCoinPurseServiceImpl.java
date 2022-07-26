@@ -38,9 +38,9 @@ public class BootCoinPurseServiceImpl implements BootCoinPurseService {
     }
 
     @Override
-    public Mono<BootCoinPurse> getCoinPurse(String documentNumber) {
+    public Mono<BootCoinPurse> getCoinPurse(String documentNumber_cellphoneNumber) {
         return bootCoinPurseRepository.findAll()
-                .filter(coinPurse -> coinPurse.getDocumentNumber().equals(documentNumber))
+                .filter(coinPurse -> coinPurse.getDocumentNumber().equals(documentNumber_cellphoneNumber) || coinPurse.getCellphoneNumber().equals(documentNumber_cellphoneNumber))
                 .elementAt(0, new BootCoinPurse(null, "NO ENCONTRADO", "NO ENCONTRADO", "NO ENCONTRADO", "NO ENCONTRADO", 0.0));
     }
 }

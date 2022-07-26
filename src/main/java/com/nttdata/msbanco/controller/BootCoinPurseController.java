@@ -38,7 +38,7 @@ public class BootCoinPurseController {
     }
 
     @GetMapping("find-id/{documentNumber}")
-    public Mono<BootCoinPurse> getCoinPurse(@PathVariable(value = "documentNumber") String documentNumber) {
-        return bootCoinPurseService.getCoinPurse(documentNumber);
+    public Mono<BootCoinPurse> getCoinPurse(@PathVariable(value = "documentNumber") String documentNumber_cellphoneNumber) {
+        return bootCoinPurseService.getCoinPurse(documentNumber_cellphoneNumber);
     }
 }

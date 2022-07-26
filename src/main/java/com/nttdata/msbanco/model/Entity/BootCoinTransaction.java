@@ -16,6 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class BootCoinTransaction {
     @Id
     private ObjectId id;
+    private Integer transactionNumber;
     private Double amount;
     private String paymentMode;
     private String accountNumber;
